@@ -1,5 +1,7 @@
 const TokenHolder = artifacts.require("TokenHolder");
 
 module.exports = async function (deployer) {
-  deployer.deploy(TokenHolder);
+  const amountToEach = 1;
+  const n = 5;
+  deployer.deploy(TokenHolder, amountToEach, n);
 };
