@@ -1,4 +1,4 @@
-# ERC11155: Mushroom
+# ERC11155 Token & Receiver
 <img src="./images/1.png" width="800" />
 
 ## Commands
@@ -6,8 +6,7 @@
  - `yarn compile` : compilation
  - `yarn test` : tests
  - `yarn migrate` : migrating to rinkeby
- - `yarn verify:m` : verifying **Mushroom** on etherscan
- - `yarn verify:r` : verifying **MushroomReceiver** on etherscan
+ - `yarn verify` : verifying **Token** on etherscan
 
 ## How to deploy your NFT on **rinkeby**?
  - Install using `yarn`
@@ -34,7 +33,6 @@
     "@openzeppelin/contracts": "^4.0.0",
     "@truffle/hdwallet-provider": "1.0.40",
     "dotenv": "^8.2.0",
-    "truffle": "^5.2.6",
     "truffle-plugin-verify": "^0.5.7"
 }
 ```
