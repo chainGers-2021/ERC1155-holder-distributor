@@ -7,11 +7,11 @@ import "./Token.sol";
 
 contract TokenHolder is ERC1155Holder, Ownable {
     uint256 public n;
-    uint256 public amount;
+    uint256 public amountForEach;
 
-    constructor(uint256 _n, uint256 _amount) {
+    constructor(uint256 _n, uint256 _amountForEach) {
         n = _n;
-        amount = _amount;
+        amountForEach = _amountForEach;
     }
 
     function sendToWinners(
@@ -20,7 +20,7 @@ contract TokenHolder is ERC1155Holder, Ownable {
         uint256 id
     ) public onlyOwner {
         require(
-            Token(tokenAddr).balanceOf(address(this), id) == n * amount,
+            Token(tokenAddr).balanceOf(address(this), id) == n * amountForEach,
             "Not enough amount to distribute to winners"
         );
 
@@ -29,7 +29,7 @@ contract TokenHolder is ERC1155Holder, Ownable {
                 address(this),
                 winners[i],
                 id,
-                amount,
+                amountForEach,
                 "0x0"
             );
         }
