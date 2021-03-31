@@ -15,7 +15,7 @@
  - Set the metadata in the `meta` directory
  - Set the nfts in the `nfts` directory
  - Run `yarn migrate` to deploy the contracts to rinkeby
- - Run `yarn verify:m` to verify the contracts on etherscan
+ - Run `yarn verify` to verify the contracts on etherscan
  - Visit *https://testnets.opensea.io/* and enter the address of above deployed `Mushroom` contract
  - **Enjoy with your NFTs!!!**
 
@@ -24,8 +24,8 @@
  - The admin of this contract can transfer tokens to anyone
 
 ## Deployments
- - [Mushroom](https://rinkeby.etherscan.io/address/0xbB52E126A7508db6FB87DBC63187f0ff4cF612eD#contracts)
- - [Token on Opensea](https://testnets.opensea.io/collection/unidentified-contract-njxc7khhdj)
+ - [Mushroom](https://rinkeby.etherscan.io/address/0xC6F3886fad4edD27934C459E4a44E711430eA36a#contracts)
+ - [Token on Opensea](https://testnets.opensea.io/collection/unidentified-contract-eekaoo6ow2)
 
 ## Dependencies
 ```
