@@ -1,5 +1,5 @@
 # ERC11155 Token & Receiver
-<img src="./images/1.png" width="800" />
+<img src="./images/1.PNG" width="800" />
 
 ## Commands
  - `yarn` : installation
