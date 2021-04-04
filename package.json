@@ -9,7 +9,7 @@
     "verify": "npx truffle run verify Token --network rinkeby --license MIT"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.0.0",
+    "@openzeppelin/contracts": "^3.4.1",
     "@truffle/hdwallet-provider": "1.0.40",
     "dotenv": "^8.2.0",
     "truffle-plugin-verify": "^0.5.7"

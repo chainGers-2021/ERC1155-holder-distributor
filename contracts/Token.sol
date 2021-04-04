@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract Token is ERC1155, Ownable {
     uint256 public collectibleId;
 
-    constructor(string memory _tokenURI) ERC1155(_tokenURI) {
+    constructor(string memory _tokenURI) ERC1155(_tokenURI) public {
         collectibleId = 0;
     }
 
