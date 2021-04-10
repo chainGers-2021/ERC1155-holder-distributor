@@ -8,8 +8,6 @@ import {
 import "./Token.sol";
 
 contract TokenHolder is ERC1155Holder, cOwnable {
-    uint256 public n; // Needs to be 5 (if top 5)
-    uint256 public amountForEach; // Needs to be 1.
     uint256 public roundId; // This is for ensuring that a claimant gets only 1 NFT per token per distribution round
 
     // Symbol of token => collectibleId
@@ -20,16 +18,19 @@ contract TokenHolder is ERC1155Holder, cOwnable {
     // Address of claimant => Symbol of token => roundId (or collectible id ?)
     mapping(address => mapping(string => uint256)) public claims;
 
-    constructor(uint256 _n, uint256 _amountForEach) public {
-        n = _n;
-        amountForEach = _amountForEach;
+    address public node;
+
+    constructor(address _node) public {
         tokenERC1155 = new Token(
             "https://storageapi.fleek.co/chaingers2021-team-bucket/meta/{id}.json"
         );
+        node = _node;
     }
 
+
+
     /// @notice Token minting can only be done by admins
-    function mintTokens(string memory _tokenSymbol) external onlyOwner {
+    function mintTokens(string calldata _tokenSymbol) external onlyOwner {
         tokenERC1155.mint(address(this), 5);
         tokenSymbolToCollectibleId[_tokenSymbol] =
             tokenERC1155.collectibleId() -
@@ -40,6 +41,7 @@ contract TokenHolder is ERC1155Holder, cOwnable {
     function rewardNFT(string calldata _tokenSymbol, address _claimant)
         external
     {
+        require(msg.sender == node);
         require(
             claims[_claimant][_tokenSymbol] !=
                 tokenSymbolToCollectibleId[_tokenSymbol], // collectibleId of the token,
