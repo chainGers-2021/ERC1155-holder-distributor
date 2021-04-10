@@ -1,10 +1,9 @@
-const Token = artifacts.require("Token");
 const TokenHolder = artifacts.require("TokenHolder");
 const assert = require("assert");
+const truffleAssert = require("truffle-assertions");
 
 contract("Token & TokenHolder", async (addresses) => {
   const admin = addresses[0];
-  const winners = addresses.slice(1, 6);
   const n = 5;
   const amountToEach = 1;
   const totalTokens = n * amountToEach;
@@ -16,19 +15,14 @@ contract("Token & TokenHolder", async (addresses) => {
 
   it("mints and distributes tokens correctly.", async () => {
     await h.mintTokens("LINK");
-    assert.strictEqual(
-      parseInt(await h.tokenSymbolToCollectibleId("LINK")),
-      0
-    );
-    
+    assert.strictEqual(parseInt(await h.tokenSymbolToCollectibleId("LINK")), 0);
     await h.mintTokens("LINK");
-    assert.strictEqual(
-      parseInt(await h.tokenSymbolToCollectibleId("LINK")),
-      1
-    );
-    
-    await h.rewardNFT("LINK", admin);
+    assert.strictEqual(parseInt(await h.tokenSymbolToCollectibleId("LINK")), 1);
 
-    await h.rewardNFT("LINK", admin).catch(()=>{console.log("Not giving NFT twice.")});
+    await h.rewardNFT("LINK", admin);
+    await truffleAssert.reverts(
+      h.rewardNFT("LINK", admin),
+      "NFT already claimed for the token symbol !"
+    );
   });
 });
