@@ -8,47 +8,27 @@ contract("Token & TokenHolder", async (addresses) => {
   const n = 5;
   const amountToEach = 1;
   const totalTokens = n * amountToEach;
-  let token, tokenHolder;
+  let h;
 
-  beforeEach(async () => {
-    token = await Token.new("");
-    tokenHolder = await TokenHolder.new(n, amountToEach);
+  before(async () => {
+    h = await TokenHolder.new(n, amountToEach);
   });
 
   it("mints and distributes tokens correctly.", async () => {
-    // Minting tokens and checking if tokenHolder receives it
-    await token.mint(tokenHolder.address, totalTokens);
+    await h.mintTokens("LINK");
     assert.strictEqual(
-      parseInt(await token.balanceOf(tokenHolder.address, 0)),
-      totalTokens
+      parseInt(await h.tokenSymbolToCollectibleId("LINK")),
+      0
     );
-
-    // Sending the token to winners
-    await tokenHolder.sendToWinners(token.address, winners, 0);
-
-    // Checking winners balances
-    winners.forEach(async (winner) => {
-      assert.strictEqual(
-        parseInt(await token.balanceOf(winner, 0)),
-        amountToEach
-      );
-    });
-  });
-
-  it("allows only owner.", async () => {
-    // Minting tokens and checking if tokenHolder receives it
-    await token.mint(tokenHolder.address, totalTokens);
+    
+    await h.mintTokens("LINK");
     assert.strictEqual(
-      parseInt(await token.balanceOf(tokenHolder.address, 0)),
-      totalTokens
+      parseInt(await h.tokenSymbolToCollectibleId("LINK")),
+      1
     );
+    
+    await h.rewardNFT("LINK", admin);
 
-    // Sending the token to winners
-    await tokenHolder
-      .sendToWinners(token.address, winners, 0, {
-        from: addresses[1],
-      })
-      .then(() => assert(false))
-      .catch(() => assert(true));
+    await h.rewardNFT("LINK", admin).catch(()=>{console.log("Not giving NFT twice.")});
   });
 });

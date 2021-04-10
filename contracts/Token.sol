@@ -2,9 +2,9 @@
 pragma solidity >=0.4.22 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import {Ownable as cOwnable} from "@chainlink/contracts/src/v0.6/vendor/Ownable.sol";
 
-contract Token is ERC1155, Ownable {
+contract Token is ERC1155, cOwnable {
     uint256 public collectibleId;
 
     constructor(string memory _tokenURI) ERC1155(_tokenURI) public {
