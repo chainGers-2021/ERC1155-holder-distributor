@@ -12,29 +12,23 @@ contract TokenHolder is ERC1155Holder, cOwnable {
 
     // Symbol of token => collectibleId
     mapping(string => uint256) public tokenSymbolToCollectibleId;
-
-    Token public tokenERC1155;
-
     // Address of claimant => Symbol of token => roundId (or collectible id ?)
     mapping(address => mapping(string => uint256)) public claims;
 
     address public node;
+    address public tokenAddr;
 
-    constructor(address _node) public {
-        tokenERC1155 = new Token(
-            "https://storageapi.fleek.co/chaingers2021-team-bucket/meta/{id}.json"
-        );
+    constructor(address _node, address _tokenAddr) public {
         node = _node;
+        tokenAddr = _tokenAddr;
     }
-
 
 
     /// @notice Token minting can only be done by admins
     function mintTokens(string calldata _tokenSymbol) external onlyOwner {
-        tokenERC1155.mint(address(this), 5);
+        Token(tokenAddr).mint(address(this), 5);
         tokenSymbolToCollectibleId[_tokenSymbol] =
-            tokenERC1155.collectibleId() -
-            1;
+            Token(tokenAddr).collectibleId()-1;
     }
 
     /// @notice Oracle node is supposed to fullfill this transaction
@@ -52,7 +46,7 @@ contract TokenHolder is ERC1155Holder, cOwnable {
             _tokenSymbol
         ]; // collectibleId of the token
 
-        tokenERC1155.safeTransferFrom(
+        Token(tokenAddr).safeTransferFrom(
             address(this),
             _claimant,
             tokenSymbolToCollectibleId[_tokenSymbol],

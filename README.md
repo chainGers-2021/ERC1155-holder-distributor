@@ -47,3 +47,15 @@
  - `truffle test`
  - `truffle migrate`
  - `truffle exec scripts/1_mint.js`
+
+
+
+
+ - `requestNFTClaim(_oracle, _jobId, _tokenSymbol).`
+   - create a request in the oracle
+   - oracle will find a NODE for completing this job
+   - oracle assigns the job to NODE
+ - NODE will process the request
+   - Confirm the NFTClaim the server
+   - If results into true:
+     - initiate the transaction to transfer the NFT
