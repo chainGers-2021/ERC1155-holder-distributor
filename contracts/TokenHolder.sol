@@ -45,10 +45,17 @@ contract TokenHolder is ERC1155Holder, cOwnable {
                 tokenSymbolToCollectibleId[_tokenSymbol], // collectibleId of the token,
             "NFT already claimed for the token symbol !"
         );
-
         // TODO: Send the NFT of the corresponding token symbol to the claimant
         claims[_claimant][_tokenSymbol] = tokenSymbolToCollectibleId[
             _tokenSymbol
         ]; // collectibleId of the token
+
+        tokenERC1155.safeTransferFrom(
+            address(this),
+            _claimant,
+            tokenSymbolToCollectibleId[_tokenSymbol],
+            1,
+            ""
+        );
     }
 }

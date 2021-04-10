@@ -42,3 +42,8 @@
  - https://github.com/OpenZeppelin/openzeppelin-contracts/tree/master/contracts/token/ERC1155
  - https://docs.opensea.io/docs/metadata-standards
  - https://docs.openzeppelin.com/contracts/3.x/erc1155#constructing_an_erc1155_token_contract
+
+## Token holder & distributor commands
+ - `truffle test`
+ - `truffle migrate`
+ - `truffle exec scripts/1_mint.js`
