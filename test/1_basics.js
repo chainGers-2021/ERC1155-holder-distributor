@@ -15,9 +15,6 @@ contract("TokenHolder", async (addresses) => {
   });
 
   it("mints tokens.", async () => {
-    // 0th token, not ownable
-    await h.mintTokens("not-ownable-nft");
-
     await h.mintTokens("LINK");
     assert.strictEqual(parseInt(await h.tokenSymbolToCollectibleId("LINK")), 1);
   });

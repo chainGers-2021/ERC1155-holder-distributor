@@ -4,9 +4,6 @@ const TokenHolder = artifacts.require("TokenHolder");
 module.exports = async (callback) => {
   [admin, user1, user2, _] = await web3.eth.getAccounts();
   h = await TokenHolder.deployed();
-
-  await h.mintTokens("not-ownable-nft");
-  console.log("not-ownable-nft minted.");
   
   await h.mintTokens("LINK");
   await h.rewardNFT("LINK", user1);

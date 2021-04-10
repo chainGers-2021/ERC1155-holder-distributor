@@ -10,7 +10,7 @@ contract Token is ERC1155, cOwnable {
     uint256 public collectibleId;
 
     constructor(string memory _tokenURI) public ERC1155(_tokenURI) {
-        collectibleId = 0;
+        collectibleId = 1;
     }
 
     function mint(address _receiver, uint256 amount) public onlyOwner {
